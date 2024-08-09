@@ -1,0 +1,34 @@
+<!-- Update Cart Price In Header -->
+  <div id="cart-total">{{ cart.total_price | money_with_currency }}</div>
+
+/* Update Cart*/ 
+ jQuery(document).ready(function() {
+  jQuery(".product-form__submit").click(function() {
+    setTimeout(function() {
+      jQuery.getJSON('/cart.js', function(cart) {
+          console.log(cart);
+          // Format the total price with currency symbol and proper decimal places
+          var totalPriceFormatted = (cart.total_price / 100).toLocaleString('en-US', {
+            style: 'currency',
+            currency: 'USD' // Replace 'USD' with your desired currency code
+          });
+          jQuery("#cart-total").html(totalPriceFormatted);
+       });
+     }, 800);
+  });
+});
+      /* On Window Load */
+       window.onload = function() {
+            setTimeout(function() {
+                $.getJSON('/cart.js', function(cart) {
+                    console.log(cart);
+                    // Format the total price with currency symbol and proper decimal places
+                    var totalPriceFormatted = (cart.total_price / 100).toLocaleString('en-US', {
+                        style: 'currency',
+                        currency: 'USD' // Replace 'USD' with your desired currency code
+                    });
+                    $("#cart-total").html(totalPriceFormatted);
+                });
+            }, 800);
+        };
+      /* On Window Load*/
